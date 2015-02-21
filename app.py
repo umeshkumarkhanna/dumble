@@ -4,6 +4,8 @@ import pyaudio
 import wave
 import sys
 import time
+import os
+import difflib
 
 rumps.debug_mode(True)  # turn on command line logging information for development - default is off
 
@@ -54,15 +56,32 @@ def listen(_):
 
 	import speech_recognition as sr
 	r = sr.Recognizer()
-	with sr.WavFile("output.wav") as source:              # use "test.wav" as the audio source
-	    audio = r.record(source)                        # extract audio data from the file
+	with sr.WavFile("output.wav") as source: # use "test.wav" as the audio source
+	    audio = r.record(source) # extract audio data from the file
 	    cmd = r.recognize(audio)
+	    print cmd
+	    if 'open' in cmd:
+	    	app = cmd.strip('open ')
+	    	print app
+	    	apps = []
+	    	
+	    	for filename in os.listdir('/Applications'):
+	    		print filename
+	    		apps.append(filename)
+
+    		closestMatch = difflib.get_close_matches(app, apps)
+    		print closestMatch
+    		subprocess.call(['cd /Applications && open Sublime\ Text.app'])
+
+
 
 	try:
 		subprocess.call(['say', cmd])
 		app.title = cmd
 		time.sleep(2.5)
-		app.title = 'Listening...'
+		app.title = 'Opening...'
+
+
 
 
 	except LookupError:                                 # speech is unintelligible
