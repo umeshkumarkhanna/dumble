@@ -1,4 +1,0 @@
-timer
-=====
-
-.. autofunction:: rumps.timer

@@ -2,6 +2,7 @@ import rumps
 import subprocess
 import pyaudio
 import wave
+import speech_recognition as sr
 import sys
 import time
 import os
@@ -74,7 +75,6 @@ def listen(_):
 	wf.writeframes(b''.join(frames))
 	wf.close()
 
-	import speech_recognition as sr
 	r = sr.Recognizer()
 	with sr.WavFile("output.wav") as source: # use "test.wav" as the audio source
 	    audio = r.record(source) # extract audio data from the file
@@ -82,7 +82,7 @@ def listen(_):
 	    print cmd
 
 	    if 'open' in cmd:
-	    	app_name = cmd.strip('open ')
+	    	app_name = cmd.replace('open ', '')
 	    	print app_name
 	    	apps = []
 
@@ -90,11 +90,8 @@ def listen(_):
 	    		print filename
 	    		apps.append(filename)
 
-    		closestMatch = str(difflib.get_close_matches(app_name, apps))
-    		print closestMatch
-    		run('cd /Applications && open ' + closestMatch + '.app')
-
-
+    		closestMatch = difflib.get_close_matches(app_name, apps)
+    		run('cd /Applications && open ' + closestMatch[0])
 
 	try:
 		subprocess.call(['say', cmd])
