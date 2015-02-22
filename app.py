@@ -90,7 +90,9 @@ if __name__ == "__main__":
 					# closestMatch = difflib.get_close_matches(app_name, apps)
 					# run('cd /Applications && open ' + closestMatch[0])
 				elif 'Leviosa' in cmd:
+					osascript('activate application "iTerm"')
 					_bash('git acp')
+					_bash("say It's Leviohsa not Leviosa!")
 
 
 		except Exception, e:
