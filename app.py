@@ -75,7 +75,7 @@ if __name__ == "__main__":
 							osascript('\n'.join(config[cmd])) # Only target play
 						elif cmd == 'Leviosa':
 							# _bash('osascript -e \'do shell script "git add -A && git commit -m \'Pushed with magic\' && git push"\'')
-							os.system("open run.app")
+							os.system('open run.app')
 						else:
 							time.sleep(.5)
 							osascript(line)
