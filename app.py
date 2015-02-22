@@ -35,7 +35,7 @@ def about(sender):
     subprocess.call(['say', 'Dumble Abracadabra'])
 
 @rumps.clicked('Listen')
-def listen(_):
+def listen():
 	CHUNK = 1024
 	FORMAT = pyaudio.paInt16
 	CHANNELS = 2
@@ -99,17 +99,24 @@ def listen(_):
 		# time.sleep(2.5)
 		# app.title = 'Opening...'
 
-
-
-
 	except LookupError:                                 # speech is unintelligible
 	    subprocess.call(['say', 'The wifi is really slow. Please try again.'])
 
 if __name__ == "__main__":
+
 	app = rumps.App('Dumble', title='Listening...', icon='favicon.png')
 
 	app.menu = [
 		rumps.MenuItem('About', dimensions=(18, 18)),
 		rumps.MenuItem('Listen', dimensions=(18, 18))
 	]
+
+	with sr.Microphone() as source:
+		while 1:
+			try:
+				listen()
+			except:
+				time.sleep(3)
+				pass
 	app.run()
+	
