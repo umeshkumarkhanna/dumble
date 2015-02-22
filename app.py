@@ -17,7 +17,11 @@ def _bash(command_str):
 
 def osascript(cmd):
 	_bash("osascript -e '" + cmd + "'")
-	print "osascript -e '" + cmd + "'"
+	# print "osascript -e '" + cmd + "'"
+
+def osascripts(cmd):
+	_bash("osascript '" + cmd + "'")
+	# print "osascript '" + cmd + "'"
 
 @rumps.clicked('About')
 def about(sender):
@@ -34,8 +38,6 @@ if __name__ == "__main__":
 		
 		lines = requests.get(data['files'][filename]['raw_url']).text.split('\n')
 		config[filename] += lines
-
-	print "config: ", config
 
 	app = rumps.App('Dumble', title='Listening...', icon='favicon.png')
 
@@ -60,9 +62,21 @@ if __name__ == "__main__":
 					_bash('say The wifi is really slow. Please try again.')
 			
 				if cmd in config.keys():
-					print cmd
-					osascript('\n'.join(config[cmd]))
-					
+					for line in config[cmd]:
+						if line[:8] == 'activate':
+							print(line)
+							osascript(line) #Only target activate
+							time.sleep(2)
+						elif line[:6] == 'window':
+							time.sleep(1)
+							print(line)
+							osascripts(line) # Only target window
+						elif line[:4] == 'play':
+							time.sleep(.5)
+							osascript('\n'.join(config[cmd])) #Only target play
+
+
+
 				elif 'open' in cmd:
 					app_name = cmd.replace('open ', '')
 					print app_name
@@ -75,6 +89,9 @@ if __name__ == "__main__":
 
 					# closestMatch = difflib.get_close_matches(app_name, apps)
 					# run('cd /Applications && open ' + closestMatch[0])
+				elif 'Leviosa' in cmd:
+					_bash('git acp')
+
 
 		except Exception, e:
 			print e
