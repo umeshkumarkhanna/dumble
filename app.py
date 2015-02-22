@@ -44,16 +44,15 @@ if __name__ == "__main__":
 		rumps.MenuItem('About', dimensions=(18, 18)),
 		rumps.MenuItem('Listen', dimensions=(18, 18))
 	]
-
 	while True:
 		try:
 			r = sr.Recognizer()
 			with sr.Microphone() as source:
-				print 'starting'
+				print 'Listening...'
 				audio = r.listen(source)
-				print 'done'
+				print 'Processing speech...'
 				cmd = r.recognize(audio)
-				print cmd
+				rumps.notification(cmd.title(), '', 'Processing...', sound=True)
 
 				try:
 					_bash('say ' + cmd)
@@ -74,6 +73,9 @@ if __name__ == "__main__":
 						elif line[:4] == 'play':
 							time.sleep(.5)
 							osascript('\n'.join(config[cmd])) # Only target play
+						elif cmd == 'Leviosa':
+							# _bash('osascript -e \'do shell script "git add -A && git commit -m \'Pushed with magic\' && git push"\'')
+							os.system("open run.scpt")
 						else:
 							time.sleep(.5)
 							osascript(line)
@@ -82,7 +84,6 @@ if __name__ == "__main__":
 				elif 'open' in cmd:
 					app_name = cmd.replace('open ', '')
 					print app_name
-					osascripts(run.scpt)
 					print "ju"
 
 		except Exception, e:
