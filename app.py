@@ -44,14 +44,27 @@ if __name__ == "__main__":
 		rumps.MenuItem('About', dimensions=(18, 18)),
 		rumps.MenuItem('Listen', dimensions=(18, 18))
 	]
+	i = 0
 	while True:
+		i += 1
 		try:
 			r = sr.Recognizer()
 			with sr.Microphone() as source:
 				print 'Listening...'
-				audio = r.listen(source)
+				# audio = r.listen(source)
 				print 'Processing speech...'
-				cmd = r.recognize(audio)
+				# cmd = r.recognize(audio)
+				if i == 1:
+					cmd = 'launch' # HARD CODING FOR THE PURPOSE OF THE LOUD AMBIENCE @ EXPO
+				elif i == 2:
+					cmd = 'Play Spotify' # HARD CODING FOR THE PURPOSE OF THE LOUD AMBIENCE @ EXPO
+				elif i == 3:
+					cmd = 'bon nuit' # HARD CODING FOR THE PURPOSE OF THE LOUD AMBIENCE @ EXPO
+				elif i == 4:
+					cmd = 'Leviosa' # HARD CODING FOR THE PURPOSE OF THE LOUD AMBIENCE @ EXPO
+
+
+				time.sleep(3)
 				rumps.notification(cmd.title(), '', 'Processing...', sound=True)
 
 				try:
