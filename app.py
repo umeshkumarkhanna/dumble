@@ -59,9 +59,11 @@ if __name__ == "__main__":
 				elif i == 2:
 					cmd = 'Play Spotify' # HARD CODING FOR THE PURPOSE OF THE LOUD AMBIENCE @ EXPO
 				elif i == 3:
-					cmd = 'bon nuit' # HARD CODING FOR THE PURPOSE OF THE LOUD AMBIENCE @ EXPO
-				elif i == 4:
 					cmd = 'Leviosa' # HARD CODING FOR THE PURPOSE OF THE LOUD AMBIENCE @ EXPO
+				elif i == 4:
+					cmd = 'bonne nuit' # HARD CODING FOR THE PURPOSE OF THE LOUD AMBIENCE @ EXPO
+				else:
+					break
 
 
 				time.sleep(3)
@@ -78,7 +80,7 @@ if __name__ == "__main__":
 						if line[:8] == 'activate':
 							print(line)
 							osascript(line) #Only target activate
-							time.sleep(2)
+							time.sleep(1)
 						elif line[:6] == 'window':
 							time.sleep(1)
 							print(line)
@@ -92,7 +94,7 @@ if __name__ == "__main__":
 						else:
 							time.sleep(.5)
 							osascript(line)
-							time.sleep(2)
+							time.sleep(1)
 
 				elif 'open' in cmd:
 					app_name = cmd.replace('open ', '')
