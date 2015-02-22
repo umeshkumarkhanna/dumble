@@ -7,6 +7,7 @@ import sys
 import time
 import os
 import difflib
+from Tkinter import *
 
 rumps.debug_mode(True)  # turn on command line logging information for development - default is off
 
@@ -81,7 +82,13 @@ def listen():
 	    cmd = r.recognize(audio)
 	    print cmd
 
-	    if 'open' in cmd:
+	    triggers = ['start web', 'web dev']
+	    if any(word in cmd for word in triggers):
+    		run('cd /Applications && open Sublime Text.app')
+	    	run('cd /Applications && open Google Chrome.app')
+	    	run('cd /Applications && open iTerm.app')
+
+	    elif 'open' in cmd:
 	    	app_name = cmd.replace('open ', '')
 	    	print app_name
 	    	apps = []
@@ -92,6 +99,7 @@ def listen():
 
     		closestMatch = difflib.get_close_matches(app_name, apps)
     		run('cd /Applications && open ' + closestMatch[0])
+
 
 	try:
 		subprocess.call(['say', cmd])
@@ -111,12 +119,24 @@ if __name__ == "__main__":
 		rumps.MenuItem('Listen', dimensions=(18, 18))
 	]
 
+	class Example(Frame):
+	  
+	    def __init__(self, parent):
+	        Frame.__init__(self, parent, background="white")
+	        self.parent = parent
+	        self.initUI()
+	    
+	    def initUI(self):
+	      
+	        self.parent.title("Dumble Setup")
+	        self.pack(fill=BOTH, expand=1)
+
 	with sr.Microphone() as source:
-		while 1:
-			try:
-				listen()
-			except:
-				time.sleep(3)
-				pass
+		r = sr.Recognizer()
+		print 'starting'
+		audio = r.listen(source)
+		print 'done'
+		text = r.recognize(audio)
+		print text
 
 	app.run()

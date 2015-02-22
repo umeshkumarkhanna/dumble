@@ -11,11 +11,15 @@ FORMAT = pyaudio.paInt16
 RATE = 44100
 
 def is_silent(snd_data):
-    "Returns 'True' if below the 'silent' threshold"
-    return max(snd_data) < THRESHOLD
+    '''
+	If anything is under a certain threshold it is silent
+    '''
+    return max(abs(i) for i in snd_data) < THRESHOLD
 
 def normalize(snd_data):
-    "Average the volume out"
+    '''
+	Scales on a scale from 0 - 16384
+    '''
     MAXIMUM = 16384
     times = float(MAXIMUM)/max(abs(i) for i in snd_data)
 
@@ -99,7 +103,7 @@ def record():
 
     r = normalize(r)
     r = trim(r)
-    r = add_silence(r, 1)
+    r = add_silence(r, .5)
     return sample_width, r
 
 def record_to_file(path):
