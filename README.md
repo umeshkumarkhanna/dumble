@@ -4,7 +4,7 @@
 Make sure you have all the dependencies installed: `pip install -r /path/to/requirements.txt`
 
 ## Why?
-Because rocking a personal Jarvis (the one from Iron Man) is awesome. The technology's there, but there hasn't been a 
+Because rocking a personal Jarvis (the one from Iron Man) is awesome. The technology's there, but there hasn't been a fully customizable Siri for Mac... until now.
 
 ## Example API
 
