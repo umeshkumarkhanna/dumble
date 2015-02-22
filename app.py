@@ -60,8 +60,9 @@ if __name__ == "__main__":
 					_bash('say ' + cmd)
 				except LookupError:
 					_bash('say The wifi is really slow. Please try again.')
-			
+				
 				if cmd in config.keys():
+
 					for line in config[cmd]:
 						if line[:8] == 'activate':
 							print(line)
@@ -73,9 +74,10 @@ if __name__ == "__main__":
 							osascripts(line) # Only target window
 						elif line[:4] == 'play':
 							time.sleep(.5)
-							osascript('\n'.join(config[cmd])) #Only target play
-
-
+							osascript('\n'.join(config[cmd])) # Only target play
+						else:
+							time.sleep(.5)
+							osascript('\n'.join(config[cmd]))
 
 				elif 'open' in cmd:
 					app_name = cmd.replace('open ', '')
@@ -83,16 +85,6 @@ if __name__ == "__main__":
 
 					osascript('activate application "' + app_name + '"')
 
-					# for filename in os.listdir('/Applications'):
-					# 	print filename
-					# 	apps.append(filename)
-
-					# closestMatch = difflib.get_close_matches(app_name, apps)
-					# run('cd /Applications && open ' + closestMatch[0])
-				elif 'Leviosa' in cmd:
-					osascript('activate application "iTerm"')
-					_bash('git acp')
-					_bash("say It's Leviohsa not Leviosa!")
 
 
 		except Exception, e:

@@ -1,3 +1,3 @@
 tell application "Spotify"
 playpause
-end tell
+end tellfskladjflksa
