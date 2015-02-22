@@ -794,7 +794,12 @@ class Window(object):
         self._textfield.validateEditing()
         text = self._textfield.stringValue()
         self.default_text = self._default_text  # reset default text
+        
         return Response(clicked, text)
+
+        
+    
+
 
 
 class Response(object):
