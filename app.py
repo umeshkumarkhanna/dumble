@@ -131,12 +131,40 @@ if __name__ == "__main__":
 	        self.parent.title("Dumble Setup")
 	        self.pack(fill=BOTH, expand=1)
 
-	with sr.Microphone() as source:
-		r = sr.Recognizer()
-		print 'starting'
-		audio = r.listen(source)
-		print 'done'
-		text = r.recognize(audio)
-		print text
+	while True:
+		try:
+			r = sr.Recognizer()
+			with sr.Microphone() as source:
+				print 'starting'
+				audio = r.listen(source)
+				print 'done'
+				cmd = r.recognize(audio)
+				print cmd
+				try:
+					subprocess.call(['say', cmd])
+				except LookupError:
+					subprocess.call(['say', 'The wifi is really slow. Please try again.'])
+
+				triggers = ['start web', 'web dev']
+
+				if any(word in cmd for word in triggers):
+					run('cd /Applications && open Sublime Text.app')
+					run('cd /Applications && open Google Chrome.app')
+					run('cd /Applications && open iTerm.app')
+
+				elif 'open' in cmd:
+					app_name = cmd.replace('open ', '')
+					print app_name
+					apps = []
+
+					for filename in os.listdir('/Applications'):
+						print filename
+						apps.append(filename)
+
+					closestMatch = difflib.get_close_matches(app_name, apps)
+					run('cd /Applications && open ' + closestMatch[0])
+
+		except:
+			pass
 
 	app.run()
