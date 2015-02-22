@@ -118,5 +118,20 @@ if __name__ == "__main__":
 			except:
 				time.sleep(3)
 				pass
+
+				
+	window = rumps.Window('Nothing...', 'ALERTZ')
+	window.title = 'WINDOWS jk'
+	window.message = 'Something.'
+	window.default_text = 'eh'
+
+	response = window.run()
+	print response
+
+	window.add_buttons('One', 'Two', 'Three')
+
+	print window.run()
+	print response
+
 	app.run()
 	
