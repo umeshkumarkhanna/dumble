@@ -77,11 +77,13 @@ if __name__ == "__main__":
 						else:
 							time.sleep(.5)
 							osascript(line)
+							time.sleep(2)
 
 				elif 'open' in cmd:
 					app_name = cmd.replace('open ', '')
 					print app_name
 					osascripts(run.scpt)
+					print "ju"
 
 		except Exception, e:
 			print e
