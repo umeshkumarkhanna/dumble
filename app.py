@@ -3,7 +3,6 @@ import speech_recognition as sr
 from lxml import html
 
 rumps.debug_mode(True)  # turn on command line logging information for development - default is off
-
 def _bash(command_str):
 	proc = subprocess.Popen(command_str, shell=True, stderr=subprocess.PIPE, stdout=subprocess.PIPE)
 	return_code = proc.wait()
@@ -77,15 +76,12 @@ if __name__ == "__main__":
 							osascript('\n'.join(config[cmd])) # Only target play
 						else:
 							time.sleep(.5)
-							osascript('\n'.join(config[cmd]))
+							osascript(line)
 
 				elif 'open' in cmd:
 					app_name = cmd.replace('open ', '')
 					print app_name
-
-					osascript('activate application "' + app_name + '"')
-
-
+					osascripts(run.scpt)
 
 		except Exception, e:
 			print e
