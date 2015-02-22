@@ -99,7 +99,7 @@ def record():
 
     r = normalize(r)
     r = trim(r)
-    r = add_silence(r, 0.5)
+    r = add_silence(r, 1)
     return sample_width, r
 
 def record_to_file(path):
