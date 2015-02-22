@@ -4,8 +4,9 @@
 Make sure you have all the dependencies installed: `pip install -r /path/to/requirements.txt`
 
 ## Why?
+Because rocking a personal Jarvis (the one from Iron Man) is awesome. The technology's there, but there hasn't been a 
 
-## API
+## Example API
 
 Dumble has an API that allows you to create your own commands. To do so, simple create a [GitHub Gist](https://gist.github.com/) titled `Dumble Settings`.
 
@@ -21,3 +22,5 @@ Each command has a trigger word and its corresponding actions. To define the tri
 	- `window/botLeft.scpt`
 	- `window/botRight.scpt`
 
+## [Video Demo](https://fang.ws/scr/2015-02-22_1243.swf)
+## [Sample Config](https://gist.github.com/AndyF/f07ace417e0d79fd7d79)
