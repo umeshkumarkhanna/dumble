@@ -46,28 +46,14 @@ if __name__ == "__main__":
 	]
 	i = 0
 	while True:
-		i += 1
 		try:
 			r = sr.Recognizer()
 			with sr.Microphone() as source:
-				print 'Listening...'
-				# audio = r.listen(source)
-				print 'Processing speech...'
-				# cmd = r.recognize(audio)
-				if i == 1:
-					cmd = 'launch' # HARD CODING FOR THE PURPOSE OF THE LOUD AMBIENCE @ EXPO
-				elif i == 2:
-					cmd = 'Play Spotify' # HARD CODING FOR THE PURPOSE OF THE LOUD AMBIENCE @ EXPO
-				elif i == 3:
-					cmd = 'Leviosa' # HARD CODING FOR THE PURPOSE OF THE LOUD AMBIENCE @ EXPO
-				elif i == 4:
-					cmd = 'bonne nuit' # HARD CODING FOR THE PURPOSE OF THE LOUD AMBIENCE @ EXPO
-				else:
-					break
-
-
-				time.sleep(3)
-				rumps.notification(cmd.title(), '', 'Processing...', sound=True)
+				print 'starting'
+				audio = r.listen(source)
+				print 'done'
+				cmd = r.recognize(audio)
+				print cmd
 
 				try:
 					_bash('say ' + cmd)
