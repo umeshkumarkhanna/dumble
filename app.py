@@ -38,7 +38,7 @@ if __name__ == "__main__":
 		lines = requests.get(data['files'][filename]['raw_url']).text.split('\n')
 		config[filename] += lines
 
-	app = rumps.App('Dumble', title='Listening...', icon='favicon.png')
+	app = rumps.App('Dumble', title='Listening...', icon='media/favicon.png')
 
 	app.menu = [
 		rumps.MenuItem('About', dimensions=(18, 18)),
