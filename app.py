@@ -49,7 +49,7 @@ if __name__ == "__main__":
 		try:
 			r = sr.Recognizer()
 			with sr.Microphone() as source:
-				print 'starting'
+				print 'listening...'
 				audio = r.listen(source)
 				print 'done'
 				cmd = r.recognize(audio)
@@ -77,6 +77,7 @@ if __name__ == "__main__":
 						elif cmd == 'Leviosa':
 							# _bash('osascript -e \'do shell script "git add -A && git commit -m \'Pushed with magic\' && git push"\'')
 							os.system('open run.app')
+
 						else:
 							time.sleep(.5)
 							osascript(line)
